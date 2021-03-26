@@ -1,16 +1,17 @@
 package pages;
 
 import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class GridLoginPage {
-    private SelenideElement loginButton = Selenide.$(Selectors.byText("Sign in with login and password"));
-    private SelenideElement emailField = Selenide.$(By.xpath("//input[@id='login']"));
-    private SelenideElement passwordField = Selenide.$(By.xpath("//input[@id='password']"));
-    private SelenideElement signInNowButton = Selenide.$(".ingrid-button__button");
+    private SelenideElement loginButton = $(Selectors.byText("Sign in with login and password"));
+    private SelenideElement emailField = $(By.xpath("//input[@id='login']"));
+    private SelenideElement passwordField = $(By.xpath("//input[@id='password']"));
+    private SelenideElement signInNowButton = $(".ingrid-button__button");
 
     @Step("Click on login button")
     public GridLoginPage clickOnLoginButton(){

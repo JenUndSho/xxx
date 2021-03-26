@@ -1,5 +1,6 @@
 package mainPageTests;
 
+import baseConfings.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -11,25 +12,7 @@ import pages.MainPage;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class MainPageTests {
-    private MainPage mainPage;
-    private GridLoginPage gridLoginPage;
-
-    @BeforeClass
-    public void setup(){
-     //   Configuration.holdBrowserOpen = true;
-
-        gridLoginPage = new GridLoginPage();
-        mainPage = new MainPage();
-
-    }
-
-    @BeforeMethod
-    @Parameters("base.url")
-    public void start(String baseURL){
-        open(baseURL);
-    }
-
+public class MainPageTests extends BaseTest{
 
     @Epic("Test CSMA site")
     @Feature("Main Page")
@@ -38,13 +21,12 @@ public class MainPageTests {
   //  @Story("")
 
     @Test
-    @Parameters({"email", "password"})
-    public void UserIsAbleToSearchProjectsByProjectName(String email, String password) throws InterruptedException {
+    public void UserIsAbleToSearchProjectsByProjectName(){
         String projectName = "2 Degrees";
-        gridLoginPage.clickOnLoginButton()
-                     .EnterAccount(email, password);
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName);
     }
+
+
 }
