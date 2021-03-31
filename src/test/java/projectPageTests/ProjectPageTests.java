@@ -35,6 +35,71 @@ public class ProjectPageTests extends BaseTest {
         projectPage.clickOnPenIconButton()
                    .enterNewArea(area)
                    .checkIfNewAreaIsInAreasContainer(area);
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Story("Bug")
+    @Description("User is able to create many areas each time pressing 'Save button' after editing")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    /**
+     * Change new Areas in code! or manually delete on site just created.
+     */
+
+    @Test
+    public void UserIsAbleToCreateManyAreasEachTimePressingSaveBtnAfterEditing() throws InterruptedException {
+        String accountName = "Tradestone";
+        String newArea1 = "e-area1";
+        String newArea2 = "e-area2";
+
+        mainPage.inputAccountField(accountName)
+                .clickOnAccountsProjectName(accountName);
+
+        projectPage.clickOnPenIconButton()
+                   .enterNewArea(newArea1)
+                   .saveChanges();
+        projectPage.clickOnPenIconButton()
+                   .enterNewArea(newArea2)
+                   .saveChanges();
+
+        projectPage.checkIfBoxAreaContainsArea(newArea1)
+                   .checkIfBoxAreaContainsArea(newArea2);
+
+
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Story("Bug")
+    @Description("User is able to create many technologies each time pressing 'Save button' after editing")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    /**
+     * Change new Technologies in code! or manually delete on site just created.
+     */
+
+    @Test
+    public void UserIsAbleToCreateManyTechnologiesEachTimePressingSaveBtnAfterEditing(){
+        String accountName = "Tradestone";
+        String newTechnology1 = "e-technology1";
+        String newTechnology2 = "e-technology2";
+
+        mainPage.inputAccountField(accountName)
+                .clickOnAccountsProjectName(accountName);
+
+        projectPage.clickOnPenIconButton()
+                .enterNewTechnology(newTechnology1)
+                .saveChanges();
+        projectPage.clickOnPenIconButton()
+                .enterNewTechnology(newTechnology2)
+                .saveChanges();
+
+        projectPage.checkIfBoxTechnologyContainsTechnology(newTechnology1)
+                   .checkIfBoxTechnologyContainsTechnology(newTechnology2);
 
 
     }

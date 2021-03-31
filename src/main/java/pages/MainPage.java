@@ -14,6 +14,8 @@ public class MainPage {
    private SelenideElement sectionWithProjects = $(".styles_contentWrapper__1tkbn");
    private SelenideElement inputAccountField = $(By.xpath("//div[@class='styles_projectsSearchItem__3p1ng'][1]//input[@type='text']"));
    private SelenideElement firstProjectFromDashboard = $$(By.xpath("//a/h6")).get(0);
+   private SelenideElement boxWithAccountNameAndProjectNameInFirstProject = $$(By.xpath("//div[@class='styles_container__mut_C styles_accountProjectBlock__2lfW_']")).get(0);
+   private SelenideElement nextPageBtn = $(By.xpath("//button[@aria-label='Go to next page']"));
 
 
     @Step("Input into project field project {0}")
@@ -33,6 +35,7 @@ public class MainPage {
     public MainPage inputAccountField(String accountName){
         inputAccountField.setValue(accountName);
         $(byText(accountName)).click();
+
         return this;
     }
 
@@ -41,5 +44,21 @@ public class MainPage {
         firstProjectFromDashboard.shouldBe(visible).click();
         return this;
     }
+
+    @Step("Check if 1-st project have account name {0}")
+    public MainPage checkIfFirstProjectCorrespondFilter(String accountName){
+        boxWithAccountNameAndProjectNameInFirstProject.shouldHave(text(accountName));
+        return this;
+    }
+
+    @Step("Go to page {0}")
+    public MainPage goToPage(int n){
+        String pageNumberXpath = "//button[normalize-space()='" + n + "']";
+        SelenideElement pageNumberBtn = $(By.xpath(pageNumberXpath));
+        pageNumberBtn.click();
+        return this;
+    }
+
+
 
 }

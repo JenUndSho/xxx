@@ -4,6 +4,11 @@ import baseConfings.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class CreatingCaseStudyPageTests extends BaseTest {
 
     @Epic("Test CSMA site")
@@ -22,6 +27,35 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         projectPage.clickOnCreateCaseStudyButton();
 
         ccsPage.checkIfCCSpContainsProjectName(projectName);
-        Thread.sleep(5000);
+
     }
+
+    @Epic("Test CSMA site")
+    @Feature("Creating Case Study Page")
+    @Story("Bug")
+    @Description("User is able to write text that exceed allowable size, than get a warning and discard changes")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void UserCanWriteTextThatExceedAllowableSizeGetWarningAndDiscardChanges() throws InterruptedException, IOException {
+        String projectName = "Advertisement Platforms";
+        List<String> summaryText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/exceededSummaryText.txt"));
+        List<String> challengesText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/exceededChallengesText.txt"));
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName(projectName);
+
+        projectPage.clickOnCreateCaseStudyButton();
+
+        ccsPage.inputTextIntoSummaryFieldFromFile(summaryText)
+               .inputTextIntoChallengeFieldFromFile(challengesText)
+               .inputTextIntoKeyChallengesField("this text doesn't have impact on test result");
+
+        ccsPage.checkErrorsSummaryChallengesVisible()
+                .clickDiscardBtn()
+                .checkErrorsSummaryChallengesHidden();
+
+    }
+
 }
