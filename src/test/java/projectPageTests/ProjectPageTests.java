@@ -30,7 +30,7 @@ public class ProjectPageTests extends BaseTest {
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName(projectName);
+                .clickOnAccountsProjectName();
 
         projectPage.clickOnPenIconButton()
                    .enterNewArea(area)
@@ -55,7 +55,7 @@ public class ProjectPageTests extends BaseTest {
         String newArea2 = "e-area2";
 
         mainPage.inputAccountField(accountName)
-                .clickOnAccountsProjectName(accountName);
+                .clickOnAccountsProjectName();
 
         projectPage.clickOnPenIconButton()
                    .enterNewArea(newArea1)
@@ -89,7 +89,7 @@ public class ProjectPageTests extends BaseTest {
         String newTechnology2 = "e-technology2";
 
         mainPage.inputAccountField(accountName)
-                .clickOnAccountsProjectName(accountName);
+                .clickOnAccountsProjectName();
 
         projectPage.clickOnPenIconButton()
                 .enterNewTechnology(newTechnology1)

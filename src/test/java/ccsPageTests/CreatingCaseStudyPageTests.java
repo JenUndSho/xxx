@@ -22,7 +22,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName(projectName);
+                .clickOnAccountsProjectName();
 
         projectPage.clickOnCreateCaseStudyButton();
 
@@ -44,7 +44,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName(projectName);
+                .clickOnAccountsProjectName();
 
         projectPage.clickOnCreateCaseStudyButton();
 
@@ -57,5 +57,33 @@ public class CreatingCaseStudyPageTests extends BaseTest {
                 .checkErrorsSummaryChallengesHidden();
 
     }
+
+    @Epic("Test CSMA site")
+    @Feature("Creating Case Study Page")
+    @Story("Bug")
+    @Description("Results page is displayed validly with deleted text from Key figures section")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void ResultsPageDisplayedValidlyWhenDeletedTextFromKeyFiguresSection() throws InterruptedException, IOException {
+        String projectName = "Advertisement Platforms";
+        List<String> achievedResultsText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/validAchievedResultsText.txt"));
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnCreateCaseStudyButton();
+
+        ccsPage.goToAchievedResults()
+                .inputTextIntoKetFiguresField()
+                .inputTextIntoAchievedResultsField(achievedResultsText)
+                .deleteTextFromKetFiguresField();
+
+        ccsPage.checkIfKeyFiguresSectionWithoutTextIsHiddenInPreviewPDF();
+
+    }
+
+
 
 }
