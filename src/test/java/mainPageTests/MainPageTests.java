@@ -24,7 +24,7 @@ public class MainPageTests extends BaseTest{
   //  @Story("")
 
     @Test
-    public void userIsAbleToSearchProjectsByProjectName(){
+    public void userIsAbleToSearchProjectsByProjectName() throws InterruptedException {
         String projectName = "2 Degrees";
 
         mainPage.inputProjectField(projectName)
@@ -152,9 +152,136 @@ public class MainPageTests extends BaseTest{
                 .inputAccountField(accountName3)
                 .goToPage(4)
                 .checkIfDashboardContainsProjectsWithAccountNames(accounts);
-
-
     }
 
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects by area")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userIsAbleToFilterProjectsByAreas() throws InterruptedException {
+        String area = "Mobile";
+
+        mainPage.inputAreaField(area)
+                .checkIfAreaIsInEachProject(area);
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects by 'Managed by me")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userIsAbleToFilterProjectsByManagedByMe() throws InterruptedException {
+        mainPage.managedByMeOptionSelect()
+                .checkIfManagedByMeProjectListIsEmpty();
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects by account and project name")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userIsAbleToFilterProjectsByAccountAndProjectName() throws InterruptedException {
+        String accountName = "Dell";
+        String projectName = "Retail Edge";
+
+        mainPage.inputAccountField(accountName)
+                .inputProjectField(projectName)
+                .checkIfFirstProjectCorrespondFilter(accountName + '\n' + projectName);
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects with many areas")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToFilterProjectsWithManyAreas() throws InterruptedException {
+        String area1 = "BigData Analytics";
+        String area2 = "Management area";
+
+        List<String> areas = Arrays.asList(area1, area2);
+        mainPage.inputAreaField(area2)
+                .inputAreaField(area1)
+                .checkIfDashboardContainsProjectsWithAreas(areas);
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects by area and technology")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToFilterProjectsByAreaAndTechnology() throws InterruptedException {
+        String area = "Fraud Protection";
+        String technology = "Typescript";
+
+        mainPage.inputAreaField(area)
+                .inputTechnologyField(technology)
+                .checkIfEachProjectFromListContainsAreaAndRandomProjectContainsTechnology
+                        (area,technology,projectPage);
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("User is able to filter projects with many technologies")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToFilterProjectsByManyTechnologies() throws InterruptedException {
+        String technology1 = "Java";
+        String technology2 = "OpenCV";
+        String technology3 = "React";
+
+        List<String> technologies = Arrays.asList(technology1, technology2, technology2);
+
+
+        mainPage.inputTechnologyField(technology1)
+                .inputTechnologyField(technology2)
+                .inputTechnologyField(technology3);
+        mainPage.checkIfEachProjectsFromListHasSelectedTechnologies(technologies, projectPage);
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("If user click on project, he should be redirected to the it's project page")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToBeRedirectedToCorrectProjectPage() throws InterruptedException {
+        String accountName = "Coleman";
+
+        mainPage.inputAccountField(accountName)
+                .clickOnAccountsProjectName();
+        projectPage.checkIfPageContainsAccountName(accountName);
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Main Page")
+    // @Story("")
+    @Description("Amount of projects on each page should be <= the number, displayed into the top-right corner")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void checkAmountOfProjectsOnDashboardOnDifferentPages() throws InterruptedException {
+        mainPage.checkAmountOfProjectsOnPage(1, 20);
+        mainPage.checkAmountOfProjectsOnPage(4, 200);
+        mainPage.checkAmountOfProjectsOnPage(34, 50);
+    }
 
 }

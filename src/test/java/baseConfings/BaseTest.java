@@ -1,5 +1,6 @@
 package baseConfings;
 
+import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -21,6 +22,7 @@ public class BaseTest {
     @Parameters({"email", "password", "base.url"})
     public void setup(String email, String password, String baseURL){
         //   Configuration.holdBrowserOpen = true;
+        Configuration.startMaximized = true;
 
         gridLoginPage = new GridLoginPage();
         mainPage = new MainPage();
@@ -42,5 +44,16 @@ public class BaseTest {
     public void login(String email, String password){
         gridLoginPage.clickOnLoginButton()
                 .EnterAccount(email, password);
+    }
+
+    public void deleteArea(String area) {
+        projectPage.clickOnPenIconButton()
+                   .deleteAreaFromContainer(area);
+    }
+
+    public void deleteTechnology(String technology) {
+        projectPage.clickOnPenIconButton()
+                   .deleteTechnologyFromContainer(technology);
+
     }
 }
