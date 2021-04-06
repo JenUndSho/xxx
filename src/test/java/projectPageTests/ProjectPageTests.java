@@ -4,6 +4,8 @@ import baseConfings.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
+
 
 public class ProjectPageTests extends BaseTest {
 
@@ -15,7 +17,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateNewAreas() throws InterruptedException {
+    public void userIsAbleToCreateNewAreas() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String area = "fool_1";
@@ -40,7 +42,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateManyAreasEachTimePressingSaveBtnAfterEditing() throws InterruptedException {
+    public void userIsAbleToCreateManyAreasEachTimePressingSaveBtnAfterEditing() throws InterruptedException {
         String accountName = "Tradestone";
         String newArea1 = "e-area01";
         String newArea2 = "e-area02";
@@ -72,7 +74,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateManyTechnologiesEachTimePressingSaveBtnAfterEditing() throws InterruptedException {
+    public void userIsAbleToCreateManyTechnologiesEachTimePressingSaveBtnAfterEditing() throws InterruptedException {
         String accountName = "Tradestone";
         String newTechnology1 = "e-technology01";
         String newTechnology2 = "e-technology02";
@@ -101,7 +103,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateNewTechnologies() throws InterruptedException {
+    public void userIsAbleToCreateNewTechnologies() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String technology = "TestTechnology!";
@@ -126,7 +128,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsNotAbleToCreateNewTechnologiesWithoutPressingEnter() throws InterruptedException{
+    public void userIsNotAbleToCreateNewTechnologiesWithoutPressingEnter() throws InterruptedException{
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String technology = "TestTechnology_v1!";
@@ -149,7 +151,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsNotAbleToCreateNewAreasWithoutPressingEnter() throws InterruptedException{
+    public void userIsNotAbleToCreateNewAreasWithoutPressingEnter() throws InterruptedException{
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String area = "TestArea_v1!";
@@ -172,7 +174,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateManyNewAreas() throws InterruptedException {
+    public void userIsAbleToCreateManyNewAreas() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String area1 = "TestArea1";
@@ -204,7 +206,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToCreateManyNewTechnologies() throws InterruptedException {
+    public void userIsAbleToCreateManyNewTechnologies() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String technology1 = "TestTechnology1";
@@ -237,7 +239,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToAddAreasFromDropDownList() throws InterruptedException {
+    public void userIsAbleToAddAreasFromDropDownList() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String area = "Protection";
@@ -262,7 +264,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToAddTechnologiesFromDropDownList() throws InterruptedException {
+    public void userIsAbleToAddTechnologiesFromDropDownList() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
         String technology = "Angular";
@@ -287,7 +289,7 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void UserIsAbleToGetHintAboutAreas() throws InterruptedException {
+    public void userIsAbleToGetHintAboutAreas() throws InterruptedException {
         String accountName = "Tradestone";
         String projectName = "PreSale";
 
@@ -298,4 +300,246 @@ public class ProjectPageTests extends BaseTest {
         projectPage.hoverOnQuestionMarkNearAreaLabel()
                 .checkIfAreaHintAppears();
     }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User should get a hint about technologies when hover " +
+            "mouse over the '?' icon near 'Technologies' caption")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userIsAbleToGetHintAboutTechnologies() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.hoverOnQuestionMarkNearTechnologyLabel()
+                .checkIfTechnologyHintAppears();
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User should get a hint about inputting area when hover mouse " +
+            "over the '?' icon near 'Areas' caption after clicking on 'Pen'-icon")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userIsAbleToGetHintAboutAreasInEditingMode() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnPenIconButton()
+                .hoverOnQuestionMarkNearAreaLabel()
+                .checkIfAreaHintAppears();
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User should get a hint about technologies when hover mouse " +
+            "over the '?' icon near 'Technologies' caption caption after clicking on 'Pen'-icon")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userIsAbleToGetHintAboutTechnologiesInEditingMode() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnPenIconButton()
+                .hoverOnQuestionMarkNearTechnologyLabel()
+                .checkIfTechnologyHintAppears();
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to write down description to the project")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userIsAbleToWriteDescriptionToProject() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+        String description = "This message doesn't have any conscience, just message, just letters!";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnPenIconButton()
+                .inputDescription(description)
+                .saveChanges()
+                .checkIfDescriptionExactAs(description);
+
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to cancel all changes by clicking the 'Discard' button")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToCancelAllChangesByClickingDiscardBtn() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+        String area1 = "PMO";
+        String area2 = "Mobile";
+        String technology1 = "AWS";
+        String technology2 = "React";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnPenIconButton()
+                .enterNewArea(area1)
+                .enterNewArea(area2)
+                .enterNewTechnology(technology1)
+                .enterNewTechnology(technology2)
+                .discardChanges();
+
+        projectPage.checkIfBoxAreaDoesNotContainArea(area1)
+                .checkIfBoxAreaDoesNotContainArea(area2)
+                .checkIfBoxTechnologyDoesNotContainTechnology(technology1)
+                .checkIfBoxTechnologyDoesNotContainTechnology(technology2);
+
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to go to the main page by clicking onto the site-icon")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userIsAbleToGoToMainPageByClickingOnSiteIcon() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnSiteIcon();
+        mainPage.checkIfItIsMainPage();
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("If there are no case studies relating to the project, relevant text should be displayed")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void noCaseStudyTextShouldBeDisplayed() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.checkIfNoCaseStudyMessageExist();
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to create new case study")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToCreateNewCaseStudy() throws InterruptedException {
+        String accountName = "Tradestone";
+        String projectName = "PreSale";
+
+        mainPage.inputAccountField(accountName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnCreateCaseStudyButton();
+        ccsPage.checkIfCCSpContainsProjectName(projectName);
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to edit case study")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToEditCaseStudy() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnFirstCaseStudyPopUpMenu()
+                .clickInPopUpOn("Edit");
+        ccsPage.checkIfCCSpContainsProjectName(projectName);
+
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to open preview case study")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToOpenPreviewCaseStudy() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnFirstCaseStudyPopUpMenu()
+                .clickInPopUpOn("Preview")
+                .checkIfPreviewCaseStudyIsOpened();
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Project Page")
+    @Description("User is able to download case study from Project page")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToDownloadCaseStudyFromProjectPage() throws InterruptedException, FileNotFoundException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnFirstCaseStudyPopUpMenu()
+                .downloadPDFCaseStudy();
+
+    }
+
+
 }

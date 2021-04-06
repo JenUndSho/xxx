@@ -33,6 +33,7 @@ public class MainPage {
    private ElementsCollection areasForEachProject = $$(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body styles_areaColumn__27Y0s']"));
    private SelenideElement paginationBtn = $(By.xpath("//div[@role='button'][@aria-haspopup='listbox']"));
    private ElementsCollection listOfPaginationNumbers = $$(By.xpath("//li[@role='option']"));
+   private SelenideElement clearBtn = $(byText("Clear"));
 
    @Step("Input into project field project {0}")
     public MainPage inputProjectField(String projectName) throws InterruptedException {
@@ -247,6 +248,12 @@ public class MainPage {
         else
             Assert.assertTrue(false, "Size of list of projects on dashboard is invalid");
 
+        return this;
+    }
+
+    @Step("Check if it is main page")
+    public MainPage checkIfItIsMainPage(){
+        clearBtn.shouldBe(visible);
         return this;
     }
 

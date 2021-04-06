@@ -4,6 +4,7 @@ import baseConfings.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,11 +14,11 @@ public class CreatingCaseStudyPageTests extends BaseTest {
 
     @Epic("Test CSMA site")
     @Feature("Creating Case Study Page")
-    @Description("On the top of CCSp should be diplayed project's and account's name")
+    @Description("On the top of CCSp should be displayed project's and account's name")
     @Severity(SeverityLevel.NORMAL)
 
     @Test
-    public void OnTheTopOfCCSpShouldBeDisplayedProjectsAndAccountsName() throws InterruptedException {
+    public void onTheTopOfCCSpShouldBeDisplayedProjectsAndAccountsName() throws InterruptedException {
         String projectName = "Advertisement Platforms";
 
         mainPage.inputProjectField(projectName)
@@ -27,7 +28,6 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         projectPage.clickOnCreateCaseStudyButton();
 
         ccsPage.checkIfCCSpContainsProjectName(projectName);
-
     }
 
     @Epic("Test CSMA site")
@@ -37,7 +37,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
 
     @Test
-    public void UserCanWriteTextThatExceedAllowableSizeGetWarningAndDiscardChanges() throws InterruptedException, IOException {
+    public void userCanWriteTextThatExceedAllowableSizeGetWarningAndDiscardChanges() throws InterruptedException, IOException {
         String projectName = "Advertisement Platforms";
         List<String> summaryText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/exceededSummaryText.txt"));
         List<String> challengesText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/exceededChallengesText.txt"));
@@ -55,7 +55,6 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         ccsPage.checkErrorsSummaryChallengesVisible()
                 .clickDiscardBtn()
                 .checkErrorsSummaryChallengesHidden();
-
     }
 
     @Epic("Test CSMA site")
@@ -65,7 +64,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
 
     @Test
-    public void ResultsPageDisplayedValidlyWhenDeletedTextFromKeyFiguresSection() throws InterruptedException, IOException {
+    public void resultsPageDisplayedValidlyWhenDeletedTextFromKeyFiguresSection() throws InterruptedException, IOException {
         String projectName = "Advertisement Platforms";
         List<String> achievedResultsText = Files.readAllLines(Paths.get("/Users/eshovkovyi/IdeaProjects/CSMA/src/main/resources/validAchievedResultsText.txt"));
 
@@ -78,11 +77,75 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         ccsPage.goToAchievedResults()
                 .inputTextIntoKetFiguresField()
                 .inputTextIntoAchievedResultsField(achievedResultsText)
-                .deleteTextFromKetFiguresField();
+                .deleteTextFromKeyFiguresField();
 
         ccsPage.checkIfKeyFiguresSectionWithoutTextIsHiddenInPreviewPDF();
-
     }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Creating Case Study Page")
+    @Description("User is able to download case study from Creating Case Study page")
+    @Severity(SeverityLevel.NORMAL)
+    //  @Story("")
+
+    @Test
+    public void userAbleToDownloadCaseStudyFromCaseStudyPage() throws InterruptedException, FileNotFoundException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnFirstCaseStudyPopUpMenu()
+                .clickInPopUpOn("Edit");
+
+        ccsPage.downloadPDFCaseStudy();
+    }
+
+    @Epic("Test CSMA site")
+    @Feature("Creating Case Study Page")
+    @Description("User is able to go back to the project page from CCSp")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToGoBackToProjectPageFromCCSpByClickingOnProjectName() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+        String accountName = "Apple";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnCreateCaseStudyButton();
+
+        ccsPage.gotToProjectPageByClickingOnProjectName();
+
+        projectPage.checkIfPageContainsAccountName(accountName);
+    }
+
+
+    @Epic("Test CSMA site")
+    @Feature("Creating Case Study Page")
+    @Description("User is able to go back to the project page from CCSp")
+    @Severity(SeverityLevel.NORMAL)
+
+    @Test
+    public void userAbleToGoBackToProjectPageFromCCSpByClickingOnCancelBtn() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+        String accountName = "Apple";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+
+        projectPage.clickOnCreateCaseStudyButton();
+
+        ccsPage.gotToProjectPageByClickingOnCancelBtn();
+
+        projectPage.checkIfPageContainsAccountName(accountName);
+    }
+
 
 
 

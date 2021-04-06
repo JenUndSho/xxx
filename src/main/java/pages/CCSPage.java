@@ -1,8 +1,7 @@
 package pages;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
@@ -10,6 +9,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class CCSPage {
@@ -25,6 +26,8 @@ public class CCSPage {
     private SelenideElement keyFiguresSectionWithNoText = $(By.xpath("//div[@id='keyFigures']//div[@class='ql-editor ql-blank']"));
     private SelenideElement keyFiguresSectionWithText = $(By.xpath("//div[@id='keyFigures']//div[@class='ql-editor']"));
     private SelenideElement keyFiguresSectionInPreviewPDF = $(By.xpath("//div[@class='styles_keyFigures__description__35X1K']"));
+    private SelenideElement downloadPDFCaseStudyBtn = $(By.xpath("//a[@title='Download case study']"));
+    private SelenideElement cancelBtn = $(byText("Cancel"));
 
     @Step("Check if CCSp contains project name {0}")
     public CCSPage checkIfCCSpContainsProjectName(String projectName){
@@ -117,7 +120,7 @@ public class CCSPage {
     }
 
     @Step("Delete text from key figures filed")
-    public CCSPage deleteTextFromKetFiguresField(){
+    public CCSPage deleteTextFromKeyFiguresField(){
         keyFiguresSectionWithText.setValue("");
         return this;
     }
@@ -125,6 +128,24 @@ public class CCSPage {
     @Step("Check if key figures section with no text is not displayed in preview PDF")
     public CCSPage checkIfKeyFiguresSectionWithoutTextIsHiddenInPreviewPDF(){
         keyFiguresSectionInPreviewPDF.shouldNotBe(visible);
+        return this;
+    }
+
+    @Step("Download PDF case study from Creating Case Study Page")
+    public CCSPage downloadPDFCaseStudy() throws FileNotFoundException {
+        File reader =  downloadPDFCaseStudyBtn.download();
+        return this;
+    }
+
+    @Step("Go to Project Page")
+    public CCSPage gotToProjectPageByClickingOnProjectName(){
+        goProjectPageButton.click();
+        return this;
+    }
+
+    @Step("Go to Project Page")
+    public CCSPage gotToProjectPageByClickingOnCancelBtn(){
+        cancelBtn.click();
         return this;
     }
 }
