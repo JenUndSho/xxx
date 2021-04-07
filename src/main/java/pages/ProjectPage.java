@@ -20,7 +20,7 @@ public class ProjectPage {
     private SelenideElement inputTechnologyField = $$(By.xpath("//input[@placeholder='Select or enter']")).get(1);
     private SelenideElement areasContainer = $$(By.xpath("//div[@class='MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth']")).get(0);
     private SelenideElement technologiesContainer = $$(By.xpath("//div[@class='MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth']")).get(1);
-    private SelenideElement createCaseStudyButton = $(byText("Create new case study"));
+    private SelenideElement createCaseStudyButton = $(byText("Create a new case study"));
     private SelenideElement backToProjects = $(byText("back to projects"));
     private SelenideElement saveBtn = $(By.xpath("//button[@type='submit']"));
     private SelenideElement discardBtn = $(byText("Discard"));
@@ -34,7 +34,7 @@ public class ProjectPage {
     private SelenideElement boxDescription = $(byText("Description")).sibling(0);
     private SelenideElement siteIcon = $(byText("Projects"));
     private SelenideElement projectInfo = $(By.xpath("//div[@class='styles_noCaseStudiesWrapper__iFONg']"));
-    private SelenideElement popUpFirstCaseStudyMenuBtn = $$(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall']")).get(0);
+    private ElementsCollection popUpCaseStudiesMenuBtns = $$(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall']"));
     private ElementsCollection allLiElements = $$(By.xpath("//li"));
     private SelenideElement previewCaseStudy = $(By.xpath("//div[@class='MuiPaper-root MuiDrawer-paper MuiDrawer-paperAnchorRight MuiPaper-elevation16']"));
 
@@ -220,8 +220,8 @@ public class ProjectPage {
     }
 
     @Step("Click on first case study's pop-up menu")
-    public ProjectPage clickOnFirstCaseStudyPopUpMenu(){
-        popUpFirstCaseStudyMenuBtn.click();
+    public ProjectPage clickOnCaseStudyPopUpMenu(int i){
+        popUpCaseStudiesMenuBtns.get(i).click();
         return this;
     }
 

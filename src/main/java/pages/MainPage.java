@@ -28,7 +28,7 @@ public class MainPage {
    private SelenideElement onlyActiveProjects = $(byText("Only active projects"));
    private SelenideElement managedByMe = $(byText("Managed by me"));
    private ElementsCollection statusCollection = $$(By.xpath("//span[@class='MuiChip-label MuiChip-labelSmall']"));
-   private SelenideElement inputTechnologyField = $(By.xpath("//div[@class='styles_projectsSearchItem__3p1ng'][4]//input[@type='text']"));
+   private SelenideElement inputTechnologyField = $(By.xpath("//div[@class='styles_projectsSearchItem__3p1ng'][5]//input[@type='text']"));
    private SelenideElement inputAreaField = $(By.xpath("//div[@class='styles_projectsSearchItem__3p1ng'][3]//input[@type='text']"));
    private ElementsCollection areasForEachProject = $$(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body styles_areaColumn__27Y0s']"));
    private SelenideElement paginationBtn = $(By.xpath("//div[@role='button'][@aria-haspopup='listbox']"));
@@ -38,15 +38,15 @@ public class MainPage {
    @Step("Input into project field project {0}")
     public MainPage inputProjectField(String projectName) throws InterruptedException {
         inputProjectField.setValue(projectName);
-        $(byText(projectName)).click();
-    //    Thread.sleep(2000);
+        $(byText(projectName)).waitUntil(visible, 2000).click();
+        Thread.sleep(2000);
         return this;
     }
 
     @Step("Input into technology field technology {0}")
     public MainPage inputTechnologyField(String technology) throws InterruptedException {
         inputTechnologyField.setValue(technology);
-        $(byText(technology)).click();
+        $(byText(technology)).waitUntil(visible, 2000).click();
         Thread.sleep(2000);
         return this;
     }
@@ -58,17 +58,17 @@ public class MainPage {
     }
 
     @Step("Input into account field account name {0}")
-    public MainPage inputAccountField(String accountName) {
+    public MainPage inputAccountField(String accountName) throws InterruptedException {
         inputAccountField.setValue(accountName);
-        $(byText(accountName)).click();
-      //  Thread.sleep(2000);
+        $(byText(accountName)).waitUntil(visible, 2000).click();
+        Thread.sleep(2000);
         return this;
     }
 
     @Step("Input into area field area {0}")
     public MainPage inputAreaField(String area) throws InterruptedException {
         inputAreaField.setValue(area);
-        $(byText(area)).click();
+        $(byText(area)).waitUntil(visible, 2000).click();
         Thread.sleep(2000);
         return this;
     }
@@ -91,7 +91,7 @@ public class MainPage {
         Thread.sleep(1000);
         String pageNumberXpath = "//button[normalize-space()='" + n + "']";
         SelenideElement pageNumberBtn = $(By.xpath(pageNumberXpath));
-        pageNumberBtn.click();
+        pageNumberBtn.waitUntil(visible, 2000).click();
         return this;
     }
 

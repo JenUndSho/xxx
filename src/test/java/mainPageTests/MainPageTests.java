@@ -154,7 +154,7 @@ public class MainPageTests extends BaseTest{
                 .checkIfDashboardContainsProjectsWithAccountNames(accounts);
     }
 
-
+/*
     @Epic("Test CSMA site")
     @Feature("Main Page")
     // @Story("")
@@ -170,6 +170,7 @@ public class MainPageTests extends BaseTest{
     }
 
 
+ */
     @Epic("Test CSMA site")
     @Feature("Main Page")
     // @Story("")
@@ -193,11 +194,12 @@ public class MainPageTests extends BaseTest{
         String accountName = "Dell";
         String projectName = "Retail Edge";
 
-        mainPage.inputAccountField(accountName)
+        mainPage
                 .inputProjectField(projectName)
                 .checkIfFirstProjectCorrespondFilter(accountName + '\n' + projectName);
     }
 
+    /*
     @Epic("Test CSMA site")
     @Feature("Main Page")
     // @Story("")
@@ -232,6 +234,8 @@ public class MainPageTests extends BaseTest{
                 .checkIfEachProjectFromListContainsAreaAndRandomProjectContainsTechnology
                         (area,technology,projectPage);
     }
+
+     */
 
     @Epic("Test CSMA site")
     @Feature("Main Page")
