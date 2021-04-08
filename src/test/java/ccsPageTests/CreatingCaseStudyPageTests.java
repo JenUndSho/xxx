@@ -1,7 +1,11 @@
 package ccsPageTests;
 
 import baseConfings.BaseTest;
+import com.codeborne.selenide.Screenshots;
+import com.codeborne.selenide.impl.Screenshot;
+import com.codeborne.selenide.testng.ScreenShooter;
 import io.qameta.allure.*;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
@@ -9,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
 
 public class CreatingCaseStudyPageTests extends BaseTest {
 

@@ -38,8 +38,15 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>5.19.0</version>
-
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>2.13.6</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.qameta.allure</groupId>

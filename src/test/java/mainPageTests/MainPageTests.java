@@ -194,7 +194,7 @@ public class MainPageTests extends BaseTest{
         String accountName = "Dell";
         String projectName = "Retail Edge";
 
-        mainPage
+        mainPage.inputAccountField(accountName)
                 .inputProjectField(projectName)
                 .checkIfFirstProjectCorrespondFilter(accountName + '\n' + projectName);
     }

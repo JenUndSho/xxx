@@ -1,6 +1,9 @@
 package baseConfings;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import com.codeborne.selenide.testng.ScreenShooter;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,17 +20,22 @@ import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.open;
 
+@Listeners({ScreenShooter.class})
 public class BaseTest {
     protected MainPage mainPage;
     protected GridLoginPage gridLoginPage;
     protected ProjectPage projectPage;
     protected CCSPage ccsPage;
 
+
     @BeforeClass
     @Parameters({"email", "password", "base.url"})
     public void setup(String email, String password, String baseURL) throws MalformedURLException {
         //   Configuration.holdBrowserOpen = true;
         Configuration.startMaximized = true;
+
+        SelenideLogger.addListener("AllureSelenide",
+                new AllureSelenide().screenshots(true).savePageSource(false));
 
         Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browser = "chrome";
