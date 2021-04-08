@@ -1,11 +1,19 @@
 package baseConfings;
 
 import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.*;
 import org.testng.annotations.*;
 import pages.CCSPage;
 import pages.GridLoginPage;
 import pages.MainPage;
 import pages.ProjectPage;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,9 +25,14 @@ public class BaseTest {
 
     @BeforeClass
     @Parameters({"email", "password", "base.url"})
-    public void setup(String email, String password, String baseURL){
+    public void setup(String email, String password, String baseURL) throws MalformedURLException {
         //   Configuration.holdBrowserOpen = true;
         Configuration.startMaximized = true;
+
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.browser = "chrome";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        Configuration.browserCapabilities = capabilities;
 
         gridLoginPage = new GridLoginPage();
         mainPage = new MainPage();
@@ -32,9 +45,14 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    @Parameters("base.url")
-    public void start(String baseURL){
+    @Parameters({"base.url", "email", "password"})
+    public void start(String baseURL, String email, String password) throws InterruptedException {
         open(baseURL);
+        Thread.sleep(2000);
+        String urlActual = url();
+
+        if(urlActual.contains("sso"))
+            login(email, password);
     }
 
 
@@ -45,12 +63,12 @@ public class BaseTest {
 
     public void deleteArea(String area) {
         projectPage.clickOnPenIconButton()
-                   .deleteAreaFromContainer(area);
+                .deleteAreaFromContainer(area);
     }
 
     public void deleteTechnology(String technology) {
         projectPage.clickOnPenIconButton()
-                   .deleteTechnologyFromContainer(technology);
+                .deleteTechnologyFromContainer(technology);
 
     }
 }

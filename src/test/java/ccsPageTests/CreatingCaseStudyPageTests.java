@@ -30,6 +30,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         ccsPage.checkIfCCSpContainsProjectName(projectName);
     }
 
+
     @Epic("Test CSMA site")
     @Feature("Creating Case Study Page")
     @Story("Bug")
@@ -57,6 +58,8 @@ public class CreatingCaseStudyPageTests extends BaseTest {
                 .clickDiscardBtn()
                 .checkErrorsSummaryChallengesHidden();
     }
+
+
 
     @Epic("Test CSMA site")
     @Feature("Creating Case Study Page")

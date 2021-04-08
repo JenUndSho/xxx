@@ -8,9 +8,9 @@
         <parameter name = "base.url" value="${base.url}"/>
 
         <classes>
-            <class name="mainPageTests.MainPageTests" ></class>
-            <class name="projectPageTests.ProjectPageTests" ></class>
-            <class name="ccsPageTests.CreatingCaseStudyPageTests"></class>
+            <class name="mainPageTests.MainPageTests" />
+            <class name="projectPageTests.ProjectPageTests" />
+            <class name="ccsPageTests.CreatingCaseStudyPageTests"/>
         </classes>
     </test>
 </suite>

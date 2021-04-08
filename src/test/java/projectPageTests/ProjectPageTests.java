@@ -458,8 +458,8 @@ public class ProjectPageTests extends BaseTest {
 
     @Test
     public void noCaseStudyTextShouldBeDisplayed() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+        String accountName = "SVB";
+        String projectName = "Clojure";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)

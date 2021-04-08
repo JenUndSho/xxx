@@ -38,7 +38,7 @@ public class MainPage {
    @Step("Input into project field project {0}")
     public MainPage inputProjectField(String projectName) throws InterruptedException {
         inputProjectField.setValue(projectName);
-        $(byText(projectName)).waitUntil(visible, 2000).click();
+        $(byText(projectName)).waitUntil(visible, 5000).click();
         Thread.sleep(2000);
         return this;
     }
