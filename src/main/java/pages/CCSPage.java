@@ -209,7 +209,7 @@ public class CCSPage {
         return this;
     }
 
-    @Step("Upload image from laptop")
+    @Step("Upload image from laptop into challenge field")
     public CCSPage uploadImageIntoChallengeField(){
         File img = new File("src/main/resources/screenshot.png");
         $$(By.xpath("//input[@type='text']")).get(1).uploadFile(img);
