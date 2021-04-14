@@ -257,5 +257,10 @@ public class MainPage {
         return this;
     }
 
+    public MainPage reloadPage(){
+       refresh();
+       return this;
+    }
+
 
 }

@@ -2,6 +2,7 @@ package mainPageTests;
 
 import baseConfings.BaseTest;
 import io.qameta.allure.*;
+import org.junit.experimental.theories.Theories;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -287,4 +288,40 @@ public class MainPageTests extends BaseTest{
         mainPage.checkAmountOfProjectsOnPage(34, 50);
     }
 
+    /**
+     * Tests below were created just to check functions API (delete)
+     */
+
+    /*
+
+    @Test
+    public void test() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+        projectPage.clickOnBackToProjectsBtn();
+        deleteCaseStudyViaAPI(110);
+        mainPage.reloadPage();
+
+        System.out.println("test done");
+    }
+
+    @Test
+    public void test1() throws InterruptedException {
+        String projectName = "Advertisement Platforms";
+
+        mainPage.inputProjectField(projectName)
+                .checkIfPageContainsProjectName(projectName)
+                .clickOnAccountsProjectName();
+        projectPage.clickOnBackToProjectsBtn();
+        int i = getIdOfCaseStudyByCaseStudyName("New Test Case Study");
+        System.out.println(i);
+        mainPage.reloadPage();
+
+        System.out.println("test done");
+    }
+
+     */
 }

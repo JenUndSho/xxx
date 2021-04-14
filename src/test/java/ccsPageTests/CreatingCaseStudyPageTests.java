@@ -196,6 +196,8 @@ public class CreatingCaseStudyPageTests extends BaseTest {
                 .saveCaseStudy()
                 .gotToProjectPageByClickingOnCancelBtn();
 
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csName));
+
         projectPage.checkIfPageContainsAccountName(projectName);
     }
 
@@ -306,5 +308,9 @@ public class CreatingCaseStudyPageTests extends BaseTest {
 
         ccsPage.saveCaseStudy()
                 .checkIfCSSavedSuccessfully();
+        Thread.sleep(3000);
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(name));
+
+        projectPage.checkIfPageContainsAccountName(projectName);
     }
 }
