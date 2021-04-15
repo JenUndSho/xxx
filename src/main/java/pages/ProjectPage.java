@@ -10,6 +10,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -134,7 +135,7 @@ public class ProjectPage {
     }
 
     @Step("Check if page contains account name {0}")
-    public ProjectPage checkIfPageContainsAccountName(String accountName) throws InterruptedException {
+    public ProjectPage checkIfPageContainsAccountName(String accountName){
         namesAccountAndProject.shouldHave(text(accountName));
         return this;
     }
@@ -238,8 +239,17 @@ public class ProjectPage {
     }
 
     @Step("Download PDF case study from Project Page")
-    public ProjectPage downloadPDFCaseStudy() throws FileNotFoundException {
-        File reader =  allLiElements.findBy(text("Download")).$(byTagName("a")).download();
-        return this;
+    public ProjectPage downloadPDFCaseStudy() {
+        try {
+            File reader =  allLiElements.findBy(text("Download")).$(byTagName("a")).download();
+            return this;
+          //  if(reader.exists() && !reader.isDirectory()) {
+          //      return this;
+          //  }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Assert.fail("File cannot be downloaded");
+        }
+            return this;
     }
 }

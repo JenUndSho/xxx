@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 
 public class ProjectPageTests extends BaseTest {
 
+   final String accountName = "Tradestone";
+   final String projectName = "PreSale";
+
 /*
     @Epic("Test CSMA site")
     @Feature("Project Page")
@@ -267,16 +270,15 @@ public class ProjectPageTests extends BaseTest {
     @Description("User is able to add technologies from drop-down list")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToAddTechnologiesFromDropDownList() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToAddTechnologiesFromDropDownList(){
+      //  String accountName = "Tradestone";
+      //  String projectName = "PreSale";
         String technology = "Angular";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnPenIconButton()
                 .enterNewTechnology(technology)
@@ -292,15 +294,14 @@ public class ProjectPageTests extends BaseTest {
     @Description("User should get a hint about areas when hover mouse over the '?' icon near 'Areas' caption")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGetHintAboutAreas() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToGetHintAboutAreas(){
+      //  String accountName = "Tradestone";
+      //  String projectName = "PreSale";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.hoverOnQuestionMarkNearAreaLabel()
                 .checkIfAreaHintAppears();
@@ -313,15 +314,14 @@ public class ProjectPageTests extends BaseTest {
             "mouse over the '?' icon near 'Technologies' caption")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGetHintAboutTechnologies() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToGetHintAboutTechnologies(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.hoverOnQuestionMarkNearTechnologyLabel()
                 .checkIfTechnologyHintAppears();
@@ -333,15 +333,14 @@ public class ProjectPageTests extends BaseTest {
             "over the '?' icon near 'Areas' caption after clicking on 'Pen'-icon")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGetHintAboutAreasInEditingMode() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToGetHintAboutAreasInEditingMode(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnPenIconButton()
                 .hoverOnQuestionMarkNearAreaLabel()
@@ -354,15 +353,14 @@ public class ProjectPageTests extends BaseTest {
             "over the '?' icon near 'Technologies' caption caption after clicking on 'Pen'-icon")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGetHintAboutTechnologiesInEditingMode() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToGetHintAboutTechnologiesInEditingMode(){
+    //    String accountName = "Tradestone";
+    //    String projectName = "PreSale";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnPenIconButton()
                 .hoverOnQuestionMarkNearTechnologyLabel()
@@ -375,16 +373,15 @@ public class ProjectPageTests extends BaseTest {
     @Description("User is able to write down description to the project")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToWriteDescriptionToProject() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToWriteDescriptionToProject(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
         String description = "This message doesn't have any conscience, just message, just letters!";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnPenIconButton()
                 .inputDescription(description)
@@ -399,11 +396,10 @@ public class ProjectPageTests extends BaseTest {
     @Description("User is able to cancel all changes by clicking the 'Discard' button")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userAbleToCancelAllChangesByClickingDiscardBtn() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userAbleToCancelAllChangesByClickingDiscardBtn(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
      //   String area1 = "PMO";
      //   String area2 = "Mobile";
         String technology1 = "AWS";
@@ -411,7 +407,7 @@ public class ProjectPageTests extends BaseTest {
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnPenIconButton()
               //  .enterNewArea(area1)
@@ -434,16 +430,15 @@ public class ProjectPageTests extends BaseTest {
     @Description("User is able to go to the main page by clicking onto the site-icon")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGoToMainPageByClickingOnSiteIcon() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userIsAbleToGoToMainPageByClickingOnSiteIcon(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
 
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnSiteIcon();
         mainPage.checkIfItIsMainPage();
@@ -455,15 +450,14 @@ public class ProjectPageTests extends BaseTest {
     @Description("If there are no case studies relating to the project, relevant text should be displayed")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void noCaseStudyTextShouldBeDisplayed() throws InterruptedException {
+    public void noCaseStudyTextShouldBeDisplayed(){
         String accountName = "SVB";
         String projectName = "Clojure";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.checkIfNoCaseStudyMessageExist();
     }
@@ -474,15 +468,14 @@ public class ProjectPageTests extends BaseTest {
     @Description("User is able to create new case study")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userAbleToCreateNewCaseStudy() throws InterruptedException {
-        String accountName = "Tradestone";
-        String projectName = "PreSale";
+    public void userAbleToCreateNewCaseStudy(){
+     //   String accountName = "Tradestone";
+     //   String projectName = "PreSale";
 
         mainPage.inputAccountField(accountName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnCreateCaseStudyButton();
         ccsPage.checkIfCCSpContainsProjectName(projectName);
@@ -495,12 +488,12 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void userAbleToEditCaseStudy() throws InterruptedException {
+    public void userAbleToEditCaseStudy(){
         String projectName = "Advertisement Platforms";
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnCaseStudyPopUpMenu(0)
                 .clickInPopUpOn("Edit");
@@ -516,12 +509,12 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void userAbleToOpenPreviewCaseStudy() throws InterruptedException {
+    public void userAbleToOpenPreviewCaseStudy(){
         String projectName = "Advertisement Platforms";
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnCaseStudyPopUpMenu(0)
                 .clickInPopUpOn("Preview")
@@ -535,12 +528,12 @@ public class ProjectPageTests extends BaseTest {
     //  @Story("")
 
     @Test
-    public void userAbleToDownloadCaseStudyFromProjectPage() throws InterruptedException, FileNotFoundException {
+    public void userAbleToDownloadCaseStudyFromProjectPage(){
         String projectName = "Advertisement Platforms";
 
         mainPage.inputProjectField(projectName)
                 .checkIfPageContainsProjectName(projectName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(projectName);
 
         projectPage.clickOnCaseStudyPopUpMenu(0)
                 .downloadPDFCaseStudy();

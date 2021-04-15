@@ -23,9 +23,8 @@ public class MainPageTests extends BaseTest{
     @Description("User is able to search projects by project name")
     @Severity(SeverityLevel.NORMAL)
   //  @Story("")
-
     @Test
-    public void userIsAbleToSearchProjectsByProjectName() throws InterruptedException {
+    public void userIsAbleToSearchProjectsByProjectName(){
         String projectName = "2 Degrees";
 
         mainPage.inputProjectField(projectName)
@@ -41,15 +40,15 @@ public class MainPageTests extends BaseTest{
             "filters and projects should open")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void resultsCorrespondFiltersAfterVisitingProjectPage() throws InterruptedException {
+    public void resultsCorrespondFiltersAfterVisitingProjectPage(){
         String accountName = "Jump Ramp Games";
+        String project = "Backend replatforming";
 
         mainPage.inputAccountField(accountName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(project);
         projectPage.clickOnBackToProjectsBtn();
-        Thread.sleep(3000);
+      //  Thread.sleep(3000);
         mainPage.checkIfFirstProjectCorrespondFilter(accountName);
 
        // mainPage.checkIfFirstProjectCorrespondFilter("Raymond James");   -> this works.
@@ -62,9 +61,8 @@ public class MainPageTests extends BaseTest{
     @Description("User is able to get the list of projects choosing an existing \"Account Name\"")
     @Severity(SeverityLevel.NORMAL)
     //  @Story("")
-
     @Test
-    public void userIsAbleToGetTheListOfProjectsChoosingExistingAccountName() throws InterruptedException {
+    public void userIsAbleToGetTheListOfProjectsChoosingExistingAccountName(){
         String accountName = "Macys";
 
         mainPage.goToPage(5)
@@ -73,7 +71,7 @@ public class MainPageTests extends BaseTest{
 
         mainPage.goToPage(1)
                 .inputAccountField(accountName);
-        Thread.sleep(1000);
+       // Thread.sleep(1000);
         mainPage.checkIfFirstProjectCorrespondFilter(accountName);
 
     }
@@ -83,9 +81,8 @@ public class MainPageTests extends BaseTest{
    // @Story("")
     @Description("User is able to filter projects by 'With case studies only'")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userAbleToFilterProjectsByWithCaseStudiesOnly() throws InterruptedException {
+    public void userAbleToFilterProjectsByWithCaseStudiesOnly() {
             mainPage.withCaseStudyOnlyOptionSelect()
                     .checkIfCaseStudiesNotEmptyForProjects();
     }
@@ -96,9 +93,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects by 'Only active projects'")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToFilterProjectsByOnlyActiveProjects() throws InterruptedException {
+    public void userIsAbleToFilterProjectsByOnlyActiveProjects(){
         mainPage.onlyActiveProjectsOptionSelect()
                 .checkIfStatusesAreActiveForProjects();
     }
@@ -109,9 +105,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects by account name")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToFilterProjectsByAccountName() throws InterruptedException {
+    public void userIsAbleToFilterProjectsByAccountName(){
         String accountName = "Coleman";
 
         mainPage.inputAccountField(accountName)
@@ -124,13 +119,13 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects by technologies")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToFilterProjectsByTechnologies() throws InterruptedException {
+    public void userIsAbleToFilterProjectsByTechnologies() {
         String technology = "Azure";
+        String project = "106 BOM - Trade Corrections CO2";
 
         mainPage.inputTechnologyField(technology)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(project);
         projectPage.checkIfBoxTechnologyContainsTechnology(technology);
 
     }
@@ -140,9 +135,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to get the list of projects not by one account")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToGetListOfProjectsNotByOneAccount() throws InterruptedException {
+    public void userIsAbleToGetListOfProjectsNotByOneAccount(){
         String accountName1 = "Apple";
         String accountName2 = "AEO";
         String accountName3 = "Coleman";
@@ -177,9 +171,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects by 'Managed by me")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToFilterProjectsByManagedByMe() throws InterruptedException {
+    public void userIsAbleToFilterProjectsByManagedByMe(){
         mainPage.managedByMeOptionSelect()
                 .checkIfManagedByMeProjectListIsEmpty();
     }
@@ -189,9 +182,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects by account and project name")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userIsAbleToFilterProjectsByAccountAndProjectName() throws InterruptedException {
+    public void userIsAbleToFilterProjectsByAccountAndProjectName(){
         String accountName = "Dell";
         String projectName = "Retail Edge";
 
@@ -242,9 +234,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("User is able to filter projects with many technologies")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userAbleToFilterProjectsByManyTechnologies() throws InterruptedException {
+    public void userAbleToFilterProjectsByManyTechnologies(){
         String technology1 = "Java";
         String technology2 = "OpenCV";
         String technology3 = "React";
@@ -264,13 +255,12 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("If user click on project, he should be redirected to the it's project page")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void userAbleToBeRedirectedToCorrectProjectPage() throws InterruptedException {
+    public void userAbleToBeRedirectedToCorrectProjectPage(){
         String accountName = "Coleman";
 
         mainPage.inputAccountField(accountName)
-                .clickOnAccountsProjectName();
+                .clickOnAccountsProjectName(accountName);
         projectPage.checkIfPageContainsAccountName(accountName);
     }
 
@@ -280,9 +270,8 @@ public class MainPageTests extends BaseTest{
     // @Story("")
     @Description("Amount of projects on each page should be <= the number, displayed into the top-right corner")
     @Severity(SeverityLevel.NORMAL)
-
     @Test
-    public void checkAmountOfProjectsOnDashboardOnDifferentPages() throws InterruptedException {
+    public void checkAmountOfProjectsOnDashboardOnDifferentPages(){
         mainPage.checkAmountOfProjectsOnPage(1, 20);
         mainPage.checkAmountOfProjectsOnPage(4, 200);
         mainPage.checkAmountOfProjectsOnPage(34, 50);

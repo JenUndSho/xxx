@@ -6,12 +6,14 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -34,49 +36,53 @@ public class MainPage {
    private SelenideElement paginationBtn = $(By.xpath("//div[@role='button'][@aria-haspopup='listbox']"));
    private ElementsCollection listOfPaginationNumbers = $$(By.xpath("//li[@role='option']"));
    private SelenideElement clearBtn = $(byText("Clear"));
+   private SelenideElement filters = $(By.xpath("//div[@class='styles_projectsListFilterContainer__kIa9Q']"));
+
+   @Step("Check if it is a main page")
+   public boolean isItMainPage(){
+       return nextPageBtn.exists();
+   }
 
    @Step("Input into project field project {0}")
-    public MainPage inputProjectField(String projectName) throws InterruptedException {
+    public MainPage inputProjectField(String projectName){
         inputProjectField.setValue(projectName);
-        $(byText(projectName)).waitUntil(visible, 5000).click();
-        Thread.sleep(2000);
+        $(byText(projectName)).shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
 
     @Step("Input into technology field technology {0}")
-    public MainPage inputTechnologyField(String technology) throws InterruptedException {
+    public MainPage inputTechnologyField(String technology){
         inputTechnologyField.setValue(technology);
-        $(byText(technology)).waitUntil(visible, 2000).click();
-        Thread.sleep(2000);
+        $(byText(technology)).shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
 
     @Step("Check if page contains project name {0}")
     public MainPage checkIfPageContainsProjectName(String projectName){
-        sectionWithProjects.shouldHave(text(projectName));
-        return this;
+       if (firstProjectFromDashboard.has(text(projectName)))
+           return this;
+       else
+           sectionWithProjects.shouldHave(text(projectName), Duration.ofSeconds(5));
+       return this;
     }
 
     @Step("Input into account field account name {0}")
-    public MainPage inputAccountField(String accountName) throws InterruptedException {
+    public MainPage inputAccountField(String accountName){
         inputAccountField.setValue(accountName);
-        $(byText(accountName)).waitUntil(visible, 2000).click();
-        Thread.sleep(2000);
+        $(byText(accountName)).shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
 
     @Step("Input into area field area {0}")
-    public MainPage inputAreaField(String area) throws InterruptedException {
+    public MainPage inputAreaField(String area){
         inputAreaField.setValue(area);
-        $(byText(area)).waitUntil(visible, 2000).click();
-        Thread.sleep(2000);
+        $(byText(area)).shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
 
     @Step("Click on 1-st project that have account name")
-    public MainPage clickOnAccountsProjectName() throws InterruptedException {
-       Thread.sleep(1000);
-        firstProjectFromDashboard.shouldBe(visible).click();
+    public MainPage clickOnAccountsProjectName(String name){
+        firstProjectFromDashboard.shouldHave(text(name)).click();
         return this;
     }
 
@@ -87,18 +93,19 @@ public class MainPage {
     }
 
     @Step("Go to page {0}")
-    public MainPage goToPage(int n) throws InterruptedException {
-        Thread.sleep(1000);
+    public MainPage goToPage(int n) {
+       // Thread.sleep(1000);
         String pageNumberXpath = "//button[normalize-space()='" + n + "']";
         SelenideElement pageNumberBtn = $(By.xpath(pageNumberXpath));
-        pageNumberBtn.waitUntil(visible, 2000).click();
+        pageNumberBtn.shouldBe(visible, Duration.ofSeconds(5)).click();
+        pageNumberBtn.shouldHave(attribute("aria-current"), Duration.ofSeconds(5));
         return this;
     }
 
     @Step("Select 'With case study only' option")
-    public MainPage withCaseStudyOnlyOptionSelect() throws InterruptedException {
+    public MainPage withCaseStudyOnlyOptionSelect() {
         withCaseStudyOnly.click();
-        Thread.sleep(3000);
+        filters.shouldHave(text("Only with case studies"), Duration.ofSeconds(5));
         return this;
     }
 
@@ -112,21 +119,22 @@ public class MainPage {
     }
 
     @Step("Select 'Only active projects' option")
-    public MainPage onlyActiveProjectsOptionSelect() throws InterruptedException {
+    public MainPage onlyActiveProjectsOptionSelect(){
         onlyActiveProjects.click();
-        Thread.sleep(3000);
+        filters.shouldHave(text("Only active projects"), Duration.ofSeconds(5));
         return this;
     }
 
     @Step("Select 'Managed by me' option")
-    public MainPage managedByMeOptionSelect() throws InterruptedException {
+    public MainPage managedByMeOptionSelect() {
         managedByMe.click();
-        Thread.sleep(3000);
+        filters.shouldHave(text("Managed by me"), Duration.ofSeconds(5));
         return this;
     }
 
     @Step("Check if statuses are active for each project")
     public MainPage checkIfStatusesAreActiveForProjects(){
+       statusCollection.get(0).shouldBe(visible, Duration.ofSeconds(5));
         for(SelenideElement element: statusCollection){
             element.scrollIntoView(true);
             element.shouldHave(text("Active"));
@@ -135,8 +143,8 @@ public class MainPage {
     }
 
     @Step("Check if dashboard contains only projects with account name {0}")
-    public MainPage checkIfDashboardContainsOnlyProjectsWithAccountName(String accountName) throws InterruptedException {
-        Thread.sleep(1000);
+    public MainPage checkIfDashboardContainsOnlyProjectsWithAccountName(String accountName){
+        firstProjectFromDashboard.shouldHave(text(accountName), Duration.ofSeconds(5));
         for(SelenideElement element: boxesWithAccountNameAndProjectName){
             element.scrollIntoView(true);
             element.shouldHave(text(accountName));
@@ -145,8 +153,12 @@ public class MainPage {
     }
 
     @Step("Check if dashboard contains only projects with account selected names")
-    public MainPage checkIfDashboardContainsProjectsWithAccountNames(List<String> accountNames) throws InterruptedException {
-        Thread.sleep(1000);
+    public MainPage checkIfDashboardContainsProjectsWithAccountNames(List<String> accountNames){
+       firstProjectFromDashboard.shouldBe(visible, Duration.ofSeconds(5));
+        for(int i=0;i<accountNames.size(); i++){
+            if(firstProjectFromDashboard.has(text(accountNames.get(i))))
+                break;
+        }
         int displayedProjectsAmount = accountNames.size();
         int N = 0;
         for(SelenideElement element: boxesWithAccountNameAndProjectName) {
@@ -183,8 +195,8 @@ public class MainPage {
     }
 
     @Step("Check if dashboard contains only projects with selected areas")
-    public MainPage checkIfDashboardContainsProjectsWithAreas(List<String> areas) throws InterruptedException {
-        Thread.sleep(3000);
+    public MainPage checkIfDashboardContainsProjectsWithAreas(List<String> areas) {
+
         int displayedProjectsAmount = areasForEachProject.size();
         int N = 0;
         for (SelenideElement element : areasForEachProject) {
@@ -206,18 +218,18 @@ public class MainPage {
     @Step("Check if each project from the list contains area {0} and random project contains technology {1}")
     public MainPage checkIfEachProjectFromListContainsAreaAndRandomProjectContainsTechnology(String area, String technology, ProjectPage projectPage) throws InterruptedException {
         checkIfAreaIsInEachProject(area);
-        clickOnAccountsProjectName();
+      //  clickOnAccountsProjectName();
         projectPage.checkIfBoxTechnologyContainsTechnology(technology);
         return this;
     }
 
     @Step("Check if projects from the list has selected technologies")
-    public MainPage checkIfEachProjectsFromListHasSelectedTechnologies(List<String> technologies, ProjectPage projectPage) throws InterruptedException {
+    public MainPage checkIfEachProjectsFromListHasSelectedTechnologies(List<String> technologies, ProjectPage projectPage){
             boolean found = false;
 
             firstProjectFromDashboard.click();
-            Thread.sleep(1000);
             SelenideElement boxWithTechnologies =  projectPage.getBoxWithTechnologies();
+            boxWithTechnologies.shouldBe(visible);
             for(int i=0; i<technologies.size(); i++){
                 if(boxWithTechnologies.has(text(technologies.get(i)))){
                     found = true;
@@ -232,12 +244,11 @@ public class MainPage {
     }
 
     @Step("Check if amount of projects on page {0} is <= the number, displayed into the top-right corner")
-    public MainPage checkAmountOfProjectsOnPage(int pageNumber, int expectedListSize) throws InterruptedException {
+    public MainPage checkAmountOfProjectsOnPage(int pageNumber, int expectedListSize){
         paginationBtn.click();
         String listSize = "" + expectedListSize;
         listOfPaginationNumbers.findBy(attribute("data-value", listSize)).click();
         goToPage(pageNumber);
-        Thread.sleep(2000);
         int size = 0;
         for(SelenideElement element: statusCollection){
             element.scrollIntoView(true);

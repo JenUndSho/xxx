@@ -41,11 +41,12 @@ public class BaseTest {
     protected GridLoginPage gridLoginPage;
     protected ProjectPage projectPage;
     protected CCSPage ccsPage;
+    protected String  csNameToBeDeleted;
 
 
     @BeforeClass
     @Parameters({"email", "password", "base.url"})
-    public void setup(String email, String password, String baseURL) throws MalformedURLException {
+    public void setup(String email, String password, String baseURL){
         //   Configuration.holdBrowserOpen = true;
         Configuration.startMaximized = true;
 
@@ -69,15 +70,18 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"base.url", "email", "password"})
-    public void start(String baseURL, String email, String password) throws InterruptedException {
+    public void start(String baseURL, String email, String password){
         open(baseURL);
-        Thread.sleep(2000);
-        String urlActual = url();
+        System.out.println("\n" + url() + "\n");
+        for(int i=0;i<200;i++){
+            if(url().contains("sso")){
+                login(email, password);
+                open(baseURL);
+                break;
+            }
+        }
 
-        if(urlActual.contains("sso"))
-            login(email, password);
     }
-
 
     public void login(String email, String password){
         gridLoginPage.clickOnLoginButton()
@@ -94,8 +98,9 @@ public class BaseTest {
                 .deleteTechnologyFromContainer(technology);
     }
 
-
-    public void deleteCaseStudyViaAPI(int id){
+    @AfterGroups("deleteAPIcs")
+    public void deleteCaseStudyViaAPI(){
+        int id = getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted);
         baseURI = "https://csma-staging.griddynamics.net/api/graphql";
         String deleteQuery = "mutation {\n" +
                 "  deleteCaseStudy(caseStudyId: "+id+")\n" +
@@ -119,8 +124,6 @@ public class BaseTest {
         ResponseBody body = response.body();
 
         System.out.println(body.asString());
-
-
     }
 
 
@@ -152,8 +155,6 @@ public class BaseTest {
 
         String bodyAsString = body.asString();
         System.out.println(bodyAsString);
-
-
 
         JsonPath jsonPath = response.jsonPath();
         List<HashMap<String, Object>> data = jsonPath.getList("data.caseStudies");

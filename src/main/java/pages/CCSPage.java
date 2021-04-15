@@ -9,6 +9,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -171,8 +172,14 @@ public class CCSPage {
     }
 
     @Step("Download PDF case study from Creating Case Study Page")
-    public CCSPage downloadPDFCaseStudy() throws FileNotFoundException {
-        File reader =  downloadPDFCaseStudyBtn.download();
+    public CCSPage downloadPDFCaseStudy() {
+        try {
+            File reader =  downloadPDFCaseStudyBtn.download();
+            return this;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Assert.fail("File cannot be downloaded");
+        }
         return this;
     }
 
