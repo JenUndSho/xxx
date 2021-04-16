@@ -183,7 +183,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("User is able to save empty case study ")
     @Severity(SeverityLevel.NORMAL)
-    @Test(groups = "deleteAPIcs")
+    @Test    //(groups = "deleteAPIcs")
     public void userAbleToSaveEmptyCaseStudy(){
         String csName = "New Test Case Study";
         csNameToBeDeleted = csName;
@@ -199,9 +199,8 @@ public class CreatingCaseStudyPageTests extends BaseTest {
                     .gotToProjectPageByClickingOnCancelBtn();
 
 
-     //   deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csName));
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csName));
 
-        projectPage.checkIfPageContainsAccountName(projectName);
     }
 
 
@@ -279,7 +278,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("Verify that the case study is saved when the text in the fields doesn't exceed the allowable size.")
     @Severity(SeverityLevel.NORMAL)
-    @Test(groups = "deleteAPIcs")
+    @Test   // (groups = "deleteAPIcs")
     public void verifyThatCaseStudySavedWhenTextInFieldsDoesntExceedAllowableSize() {
     //    String projectName = "Advertisement Platforms";
         String text = "I can write text here";
@@ -305,7 +304,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
             ccsPage.saveCaseStudy()
                     .checkIfCSSavedSuccessfully();
 
-       // deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(name));
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(name));
 
     }
 }

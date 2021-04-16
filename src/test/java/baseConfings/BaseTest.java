@@ -72,8 +72,8 @@ public class BaseTest {
     @Parameters({"base.url", "email", "password"})
     public void start(String baseURL, String email, String password){
         open(baseURL);
-        System.out.println("\n" + url() + "\n");
-        for(int i=0;i<200;i++){
+      //  System.out.println("\n" + url() + "\n");
+        for(int i=0;i<=500;i++){
             if(url().contains("sso")){
                 login(email, password);
                 open(baseURL);
@@ -98,9 +98,9 @@ public class BaseTest {
                 .deleteTechnologyFromContainer(technology);
     }
 
-    @AfterGroups("deleteAPIcs")
-    public void deleteCaseStudyViaAPI(){
-        int id = getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted);
+   // @AfterGroups("deleteAPIcs")
+    public void deleteCaseStudyViaAPI(int id){
+       // int id = getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted);
         baseURI = "https://csma-staging.griddynamics.net/api/graphql";
         String deleteQuery = "mutation {\n" +
                 "  deleteCaseStudy(caseStudyId: "+id+")\n" +
