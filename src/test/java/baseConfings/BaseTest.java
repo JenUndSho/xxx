@@ -74,10 +74,10 @@ public class BaseTest {
     public void start(String baseURL, String email, String password){
         open(baseURL);
       //  System.out.println("\n" + url() + "\n");
-        for(int i=0;i<=500;i++){
+        for(int i=0;i<=1000;i++){
             if(url().contains("sso")){
                 login(email, password);
-                open(baseURL);
+                // open(baseURL);
                 break;
             }
         }

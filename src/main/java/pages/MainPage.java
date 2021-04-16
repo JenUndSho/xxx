@@ -22,7 +22,7 @@ public class MainPage {
   //   This works, but I would try below path!  private SelenideElement sectionWithProjects = $(".styles_contentWrapper__1tkbn");
    private SelenideElement sectionWithProjects = $(By.xpath("//tbody[@class='MuiTableBody-root']"));
    private SelenideElement inputAccountField = $(By.xpath("//div[@class='styles_projectsSearchItem__3p1ng'][1]//input[@type='text']"));
-   private SelenideElement firstProjectFromDashboard = $$(By.xpath("//a/h6")).get(0);
+   private SelenideElement firstProjectFromDashboard = $$(By.xpath("//th//a/h6")).get(0);
    private ElementsCollection boxesWithAccountNameAndProjectName = $$(By.xpath("//div[@class='styles_container__mut_C styles_accountProjectBlock__2lfW_']"));
    private SelenideElement nextPageBtn = $(By.xpath("//button[@aria-label='Go to next page']"));
    private SelenideElement withCaseStudyOnly = $(byText("With case studies only"));
@@ -59,10 +59,11 @@ public class MainPage {
 
     @Step("Check if page contains project name {0}")
     public MainPage checkIfPageContainsProjectName(String projectName){
+       firstProjectFromDashboard.shouldBe(visible, Duration.ofSeconds(6));
        if (firstProjectFromDashboard.has(text(projectName)))
            return this;
        else
-           sectionWithProjects.shouldHave(text(projectName), Duration.ofSeconds(5));
+           sectionWithProjects.shouldHave(text(projectName), Duration.ofSeconds(6));
        return this;
     }
 
