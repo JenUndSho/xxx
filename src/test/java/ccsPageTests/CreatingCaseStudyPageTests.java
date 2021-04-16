@@ -1,9 +1,12 @@
 package ccsPageTests;
 
 import baseConfings.BaseTest;
+import com.codeborne.selenide.AssertionMode;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
 import com.codeborne.selenide.impl.Screenshot;
 import com.codeborne.selenide.testng.ScreenShooter;
+import com.codeborne.selenide.testng.SoftAsserts;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -183,7 +186,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("User is able to save empty case study ")
     @Severity(SeverityLevel.NORMAL)
-    @Test    //(groups = "deleteAPIcs")
+    @Test //(groups = {"d1"})
     public void userAbleToSaveEmptyCaseStudy(){
         String csName = "New Test Case Study";
         csNameToBeDeleted = csName;
@@ -194,12 +197,13 @@ public class CreatingCaseStudyPageTests extends BaseTest {
 
             projectPage.clickOnCreateCaseStudyButton();
 
+            Configuration.assertionMode = AssertionMode.SOFT;
             ccsPage.inputCaseStudyName(csName)
                     .saveCaseStudy()
                     .gotToProjectPageByClickingOnCancelBtn();
 
-
-        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csName));
+           deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csName));
+            Configuration.assertionMode = AssertionMode.STRICT;
 
     }
 
@@ -278,7 +282,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("Verify that the case study is saved when the text in the fields doesn't exceed the allowable size.")
     @Severity(SeverityLevel.NORMAL)
-    @Test   // (groups = "deleteAPIcs")
+    @Test //(groups = {"d2"})
     public void verifyThatCaseStudySavedWhenTextInFieldsDoesntExceedAllowableSize() {
     //    String projectName = "Advertisement Platforms";
         String text = "I can write text here";
@@ -301,10 +305,12 @@ public class CreatingCaseStudyPageTests extends BaseTest {
             ccsPage.goToAchievedResults()
                     .inputTextIntoAchievedResultsField(text)
                     .inputTextIntoKetFiguresField();
+        Configuration.assertionMode = AssertionMode.SOFT;
             ccsPage.saveCaseStudy()
                     .checkIfCSSavedSuccessfully();
 
-        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(name));
+       deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(name));
+        Configuration.assertionMode = AssertionMode.STRICT;
 
     }
 }

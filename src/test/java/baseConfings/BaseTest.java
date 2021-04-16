@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.ScreenShooter;
+import com.codeborne.selenide.testng.SoftAsserts;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -35,7 +36,7 @@ import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.open;
 
-@Listeners({ScreenShooter.class})
+@Listeners({ScreenShooter.class, SoftAsserts.class})
 public class BaseTest {
     protected MainPage mainPage;
     protected GridLoginPage gridLoginPage;
@@ -168,6 +169,21 @@ public class BaseTest {
         return 0;
     }
 
+/*
+    @AfterMethod(dependsOnGroups = {"d1"})
+    @Parameters({"base.url"})
+    public void deleteCS(String baseURL){
+        open(baseURL);
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted));
+    }
 
+    @AfterMethod(dependsOnGroups = {"d2"})
+    @Parameters({"base.url"})
+    public void deleteCS2(String baseURL){
+        open(baseURL);
+        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted));
+    }
+
+ */
 
 }
