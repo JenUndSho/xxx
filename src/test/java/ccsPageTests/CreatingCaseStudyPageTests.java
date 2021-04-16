@@ -9,6 +9,7 @@ import com.codeborne.selenide.testng.ScreenShooter;
 import com.codeborne.selenide.testng.SoftAsserts;
 import io.qameta.allure.*;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -186,7 +187,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("User is able to save empty case study ")
     @Severity(SeverityLevel.NORMAL)
-    @Test //(groups = {"d1"})
+    @Test
     public void userAbleToSaveEmptyCaseStudy(){
         String csName = "New Test Case Study";
         csNameToBeDeleted = csName;
@@ -282,7 +283,7 @@ public class CreatingCaseStudyPageTests extends BaseTest {
     @Feature("Creating Case Study Page")
     @Description("Verify that the case study is saved when the text in the fields doesn't exceed the allowable size.")
     @Severity(SeverityLevel.NORMAL)
-    @Test //(groups = {"d2"})
+    @Test
     public void verifyThatCaseStudySavedWhenTextInFieldsDoesntExceedAllowableSize() {
     //    String projectName = "Advertisement Platforms";
         String text = "I can write text here";
@@ -293,7 +294,6 @@ public class CreatingCaseStudyPageTests extends BaseTest {
                     .clickOnAccountsProjectName(projectName);
 
             projectPage.clickOnCreateCaseStudyButton();
-
 
             ccsPage.inputCaseStudyName(name)
                     .goToProblemStatement()
@@ -313,4 +313,6 @@ public class CreatingCaseStudyPageTests extends BaseTest {
         Configuration.assertionMode = AssertionMode.STRICT;
 
     }
+
+
 }

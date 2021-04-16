@@ -71,13 +71,14 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"base.url", "email", "password"})
-    public void start(String baseURL, String email, String password){
+    public void start(String baseURL, String email, String password) throws InterruptedException {
         open(baseURL);
+        Thread.sleep(3000);
       //  System.out.println("\n" + url() + "\n");
-        for(int i=0;i<=1000;i++){
+        for(int i=0;i<=200;i++){
             if(url().contains("sso")){
                 login(email, password);
-                // open(baseURL);
+                 open(baseURL);
                 break;
             }
         }
@@ -170,20 +171,14 @@ public class BaseTest {
     }
 
 /*
-    @AfterMethod(dependsOnGroups = {"d1"})
-    @Parameters({"base.url"})
-    public void deleteCS(String baseURL){
-        open(baseURL);
-        deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted));
-    }
-
-    @AfterMethod(dependsOnGroups = {"d2"})
-    @Parameters({"base.url"})
-    public void deleteCS2(String baseURL){
-        open(baseURL);
+    @AfterMethod(onlyForGroups = {"d2"})
+    public void deleteCS2(){
         deleteCaseStudyViaAPI(getIdOfCaseStudyByCaseStudyName(csNameToBeDeleted));
     }
 
  */
+
+
+
 
 }
